@@ -18,10 +18,16 @@ export class KanbanItemController {
         return this.kanbanItemService.update(id, updateKanbanItemDto);
     }
 
-    // GET kanban item full
+    // GET kanban item
     @Get('id')
     findOne(@Param(':id') id: string) {
         return this.kanbanItemService.findOne(id);
+    }
+
+    // GET all kanban itens
+    @Get()
+    findAll() {
+        return this.kanbanItemService.findAll();
     }
 
     // DELETE kanban item

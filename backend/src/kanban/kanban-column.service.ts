@@ -50,6 +50,19 @@ export class KanbanColumnService {
         return findedColumn;
     }
 
+    async findAll(userId: string) {
+        const findedColumns = await this.prisma.kanban_column.findMany({
+            where: { user_id: userId },
+            select: { name: true, user_id: true, kanbanItems: true, id: true},
+        })
+
+        if (!findedColumns) {
+            throw new NotFoundException("Kanban column not founded");
+        }
+
+        return findedColumns;
+    }
+
     async delete(id: string) {
         try {
             const deletedColumn = await this.prisma.kanban_column.delete({

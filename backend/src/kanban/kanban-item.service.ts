@@ -59,6 +59,29 @@ export class KanbanItemService {
         return findedItem;
     }
 
+    async findAll(userId: string) {
+        const findedItems = await this.prisma.kanban_item.findMany({
+            where: { 
+                column: {
+                    user_id: userId
+                }
+             },
+            select: { 
+                id: true, 
+                name: true, 
+                description: true,
+                importance: true,
+                column_id: true,
+            },
+        })
+
+        if (!findedItems) {
+            throw new NotFoundException("Kanban items not founded");
+        }
+
+        return findedItems;
+    }
+
     async delete(id: string) {
         try {
             const deletedItem = await this.prisma.kanban_item.delete({

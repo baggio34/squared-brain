@@ -26,6 +26,14 @@ export class KanbanColumnController {
         return this.kanbanColumnService.findOne(id);
     }
 
+    // GET all
+    @Get()
+    findAll() {
+        // just to mock while i don't implement auth
+        const userId = '24086353-e80f-4fd4-922d-78859dcb4cd9';
+        return this.kanbanColumnService.findAll(userId);
+    }
+
     // DELETE kanban column
     @Delete('id')
     delete(@Param(':id') id: string) {
